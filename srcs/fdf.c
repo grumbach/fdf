@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:33:07 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/18 13:29:03 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/18 16:02:48 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 static void		overmind(const char *read, const int y, const int x)
 {
 	t_point		web[y][x];
+	int			y_count;
+	int			x_count;
 
-	web[2][3].color = 42;
+	y_count = -1;
+	while (++y_count < y && (x_count = -1))
+		while (++x_count)
+			web[y_count][x_count].color = 0xFFFFFF;
 	fdf_parser(y, x, web, read);
+	ft_memdel((void**)&read);
 	fdf_painter(y, x, web);
 }
 
