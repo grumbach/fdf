@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 10:52:13 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/18 11:10:00 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/18 15:14:20 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,13 @@ static char		*joiner(char *read, char *line)
 	char		*tmp_read;
 	char		*tmp_line;
 	char		*new;
+	size_t		len;
 
 	tmp_read = read;
 	tmp_line = line;
+	len = ft_strlen(line);
+	while (--len && (line[len] == ' ' || line[len] == '\t'))
+		line[len] = 0;
 	new = ft_strnjoin(3, (read ? read : ""), line, "\n");
 	if (tmp_read)
 		free(tmp_read);
@@ -65,7 +69,7 @@ char			*fdf_reader_checker(const char *file, int *y, int *x)
 	read = NULL;
 	status = 1;
 	if (((fd = open(file, O_RDONLY)) || 1) && fd == -1)
-		errors(0, 0);
+		errors(0, file);
 	line = NULL;
 	while ((status = ft_get_next_line(fd, &line)) && status == 1)
 	{
