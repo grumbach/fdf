@@ -6,7 +6,7 @@
 #    By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/11 00:03:30 by agrumbac          #+#    #+#              #
-#    Updated: 2017/02/19 10:58:19 by agrumbac         ###   ########.fr        #
+#    Updated: 2017/02/19 14:37:09 by agrumbac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,7 @@ fclean: clean
 
 test:
 	@${CC} -I./libft/includes/ -Llibft/ -lft -L${MLX} -lmlx -I. -I${MLX} \
-		${FRAMEWORKS}  -g -o ${NAME} \
-	$(addprefix srcs/, ${SRC})
+	${FRAMEWORKS} -fsanitize=address -g -o ${NAME} $(addprefix srcs/, ${SRC})
 
 re: fclean all
 

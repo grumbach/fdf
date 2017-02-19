@@ -6,18 +6,18 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 10:54:45 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 16:58:27 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void				put_pixel(t_mlx *mlx, double x, double y, int color)
+void				put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	int				i;
 
 	if (x >= IMG_W || y >= IMG_H)
-		errors(0, "Out of bounds");
+		errors(2, "Out of bounds");
 	i = mlx->linesize * y + x * 4;
 	mlx->data[i] = color & 0xff;
 	mlx->data[++i] = color >> 8 & 0xff;
@@ -32,12 +32,12 @@ static void			painter(const int y, const int x, t_point web[y][x], \
 
 	y_count = -1;
 	while (++y_count < y && (x_count = -1))
-		while (++x_count)
-			put_pixel(mlx, x_count, y_count, web[y_count][x_count].color);
-	put_pixel(mlx, 999, 999, DEFAULT_COLOR);
+		while (++x_count < x)
+			put_pixel(mlx, x_count * 2, y_count * 2, \
+				web[y_count][x_count].color);
 }
 
-void 			fdf_painter(const int y, const int x, t_point web[y][x])
+void				fdf_painter(const int y, const int x, t_point web[y][x])
 {
 	t_mlx		mlx;
 

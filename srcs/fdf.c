@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:33:07 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 10:04:47 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 16:52:12 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ static void		overmind(const char *read, const int y, const int x)
 
 	y_count = -1;
 	while (++y_count < y && (x_count = -1))
-		while (++x_count)
+		while (++x_count < x)
+		{
+			web[y_count][x_count].x = 0;
+			web[y_count][x_count].y = 0;
+			web[y_count][x_count].z = 0;
 			web[y_count][x_count].color = DEFAULT_COLOR;
+		}
 	fdf_parser(y, x, web, read);
 	ft_memdel((void**)&read);
 	fdf_painter(y, x, web);
@@ -38,7 +43,7 @@ int				main(int ac, char **av)
 	if (ac > 1)
 	{
 		if (!(read = fdf_reader_checker(av[1], &y, &x)))
-			errors(-1, av[1]);
+			errors(3, av[1]);
 		else
 			overmind(read, y, x);
 	}
@@ -49,28 +54,20 @@ int				main(int ac, char **av)
 
 long			errors(const int err, const char *name)
 {
-	if (err == 0 && !name)
+	ft_putstr_fd("fdf: ", 2);
+	if (name)
 	{
-		ft_putendl_fd(strerror(errno), 2);
-		exit(1);
-	}
-	else if (err == 0 && name)
-	{
-		ft_putstr_fd("fdf: ", 2);
 		ft_putstr_fd(name, 2);
-		ft_putendl_fd(strerror(errno), 2);
-		exit(1);
+		ft_putstr_fd(" ", 2);
 	}
-	else if (err == -1)
-	{
-		ft_putstr_fd("fdf: ", 2);
-		ft_putstr_fd(name, 2);
+	if (err == 0)
+		ft_putendl_fd(strerror(errno), 2);
+	else if (err == 1)
+		ft_putstr_fd("\nUsage: fdf [file]\n", 2);
+	else if (err == 2)
+		ft_putstr_fd("\n", 2);
+	else if (err == 3)
 		ft_putstr_fd(" : Invalid map\n", 2);
-	}
-	else if (err == 1 && !name)
-	{
-		ft_putstr_fd("Usage: fdf [file ...]\n", 2);
-		exit(1);
-	}
+	exit(1);
 	return (0);
 }

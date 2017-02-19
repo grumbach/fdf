@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 10:55:20 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 16:32:51 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 typedef	struct		s_point
 {
-	double			x;
-	double			y;
-	double			z;
+	int				x;
+	int				y;
+	int				z;
 	int				color;
 }					t_point;
 
@@ -32,8 +32,8 @@ typedef struct		s_mlx
 	void			*win;
 	void			*img;
 	char			*data;
-	int				bpp;//bitperpixel
-	int				linesize;//linesize
+	int				bpp;
+	int				linesize;
 	int				endian;
 }					t_mlx;
 
@@ -43,7 +43,7 @@ void 				fdf_parser(const int y, const int x, t_point web[y][x], \
 void 				fdf_painter(const int y, const int x, t_point web[y][x]);
 long				errors(const int err, const char *name);
 
-void				put_pixel(t_mlx *mlx, double x, double y, int color);
+void				put_pixel(t_mlx *mlx, int x, int y, int color);
 int					mouse(int button, int x, int y, void *param);
 int					keys(int keycode, void *param);
 

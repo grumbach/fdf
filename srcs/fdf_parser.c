@@ -6,13 +6,13 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 23:10:35 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 10:11:58 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 16:59:14 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void 			fdf_parser(const int y, const int x, t_point web[y][x], \
+void			fdf_parser(const int y, const int x, t_point web[y][x], \
 					const char *read)
 {
 	int		y_count;
@@ -36,9 +36,9 @@ void 			fdf_parser(const int y, const int x, t_point web[y][x], \
 					read++;
 			}
 			web[y_count][x_count].x = x_count;
+			web[y_count][x_count].y = y_count;
 			read++;
 		}
-		web[y_count][x_count].y = y_count;
 	}
 }
 
@@ -90,7 +90,7 @@ static char		*joiner(char *read, char *line)
 
 char			*fdf_reader_checker(const char *file, int *y, int *x)
 {
-	char 	*line;
+	char	*line;
 	char	*read;
 	int		fd;
 	int		status;
@@ -103,7 +103,7 @@ char			*fdf_reader_checker(const char *file, int *y, int *x)
 	line = NULL;
 	while ((status = ft_get_next_line(fd, &line)) && status == 1)
 	{
-		countx = count_numbers(line , 0);
+		countx = count_numbers(line, 0);
 		if (!*y)
 			*x = countx;
 		else if (*x != countx || countx == -1)
