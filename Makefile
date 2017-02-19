@@ -6,13 +6,13 @@
 #    By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/11 00:03:30 by agrumbac          #+#    #+#              #
-#    Updated: 2017/02/19 10:11:55 by agrumbac         ###   ########.fr        #
+#    Updated: 2017/02/19 10:58:19 by agrumbac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = fdf.c fdf_parser.c fdf_painter.c
+SRC = fdf.c fdf_parser.c fdf_painter.c fdf_key.c fdf_mouse.c
 
 OBJDIR = objs
 
