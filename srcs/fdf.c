@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:33:07 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/18 16:02:48 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 09:43:31 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,18 @@ static void		overmind(const char *read, const int y, const int x)
 
 int				main(int ac, char **av)
 {
-	int			i;
 	int			y;
 	int			x;
 	char		*read;
 
-	i = 1;
 	x = 0;
 	y = 0;
 	if (ac > 1)
 	{
-		while (i < ac)
-		{
-			if (!(read = fdf_reader_checker(av[i], &y, &x)))
-				errors(-1, av[i]);
-			else
-				overmind(read, y, x);
-			i++;
-		}
+		if (!(read = fdf_reader_checker(av[1], &y, &x)))
+			errors(-1, av[1]);
+		else
+			overmind(read, y, x);
 	}
 	else
 		errors(1, 0);
