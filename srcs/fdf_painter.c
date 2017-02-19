@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 09:33:32 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 10:09:35 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void			starcraft(const int y, const int x, t_point web[y][x], \
 	y_count = -1;
 	while (++y_count < y && (x_count = -1))
 		while (++x_count)
-			put_pixel(mlx, x, y, web[y_count][x_count].color);
+			put_pixel(mlx, x_count, y_count, web[y_count][x_count].color);
+	put_pixel(mlx, 999, 999, DEFAULT_COLOR);
 }
 
 void 			fdf_painter(const int y, const int x, t_point web[y][x])

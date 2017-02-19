@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 09:43:50 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/19 10:05:43 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ long				errors(const int err, const char *name);
 # define WIN_H 1000
 # define IMG_W 1000
 # define IMG_H 1000
+
+# define DEFAULT_COLOR 0x00ff00
 
 #endif
