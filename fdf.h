@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 10:52:38 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 10:56:09 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ typedef struct		s_xy
 }					t_xy;
 
 char				*fdf_reader_checker(const char *file, int *y, int *x);
-void 				fdf_parser(const int y, const int x, t_point web[y][x], \
+void				fdf_parser(const int y, const int x, t_point web[y][x], \
 					const char *read);
-void 				fdf_painter(const int y, const int x, t_point web[y][x]);
+void				fdf_painter(const int y, const int x, t_point web[y][x]);
 long				errors(const int err, const char *name);
 void				put_pixel(t_mlx *mlx, int x, int y, int color);
 void				put_line(t_mlx *mlx, t_xy a, t_xy b, int color);
