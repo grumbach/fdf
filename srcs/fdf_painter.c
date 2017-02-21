@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 17:33:32 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 17:48:27 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void				fdf_painter(const int y, const int x, t_point web[y][x])
 	mlx.img = mlx_new_image(mlx.mlx_ptr, IMG_W, IMG_H);
 	mlx.data = mlx_get_data_addr(mlx.img, &(mlx.bpp), &(mlx.linesize), \
 			&(mlx.endian));
-	mlx_key_hook(mlx.win, keys, &mlx);
+	mlx_hook(mlx.win, 2, 3, keys, &mlx);
 	mlx_mouse_hook(mlx.win, mouse, &mlx);
 	painter(&mlx);
 	mlx_loop(mlx.mlx_ptr);
