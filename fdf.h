@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 16:03:48 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:58:22 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int					get_colorful(t_mlx *mlx, int x_count, int y_count);
 # define WIN_NAME "fdf"
 # define WIN_W 1024
 # define WIN_H 632
-# define IMG_W 1024
-# define IMG_H 632
+# define IMG_W WIN_W + 200
+# define IMG_H WIN_H + 200
 
 # define DEFAULT_COLOR 0x00ff00
 

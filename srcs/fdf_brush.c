@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 02:44:04 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 16:26:43 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 17:41:06 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int					get_colorful(t_mlx *mlx, int x_count, int y_count)
 {
 	int				color;
-	t_point			(*web)[mlx->web_y][mlx->web_x];
 
+	t_point(*web)[mlx->web_y][mlx->web_x];
 	web = mlx->web;
 	color = DEFAULT_COLOR;
 	if (COLOR != DEFAULT_COLOR)

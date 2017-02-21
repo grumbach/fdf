@@ -6,19 +6,38 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 10:53:58 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 16:25:47 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 17:40:49 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	colorise(t_mlx *mlx, int keycode)
+static void		reset(t_mlx *mlx)
+{
+	int			y_count;
+	int			x_count;
+
+	t_point(*web)[mlx->web_y][mlx->web_x];
+	web = mlx->web;
+	y_count = -1;
+	while (++y_count < mlx->web_y && (x_count = -1))
+		while (++x_count < mlx->web_x)
+			COLOR = DEFAULT_COLOR;
+	ZOOM = (WIN_W / mlx->web_x > WIN_H / mlx->web_y ? WIN_H / mlx->web_y : \
+			WIN_W / mlx->web_x);
+	POS_X = 100;
+	POS_Y = 100;
+	ANGLE_X = 3;
+	ANGLE_Y = 3;
+}
+
+static void		colorise(t_mlx *mlx, int keycode)
 {
 	int			y_count;
 	int			x_count;
 	int			col;
-	t_point		(*web)[mlx->web_y][mlx->web_x];
 
+	t_point(*web)[mlx->web_y][mlx->web_x];
 	web = mlx->web;
 	srand(time(NULL));
 	col = rand();
@@ -27,13 +46,13 @@ static void	colorise(t_mlx *mlx, int keycode)
 		while (++x_count < mlx->web_x)
 		{
 			if (keycode == 49)
-				COLOR = (COLOR + col) % 0xffffff;
+				COLOR = (COLOR + col + Z * 42) % 0xffffff;
 			else
 				COLOR = (COLOR + rand()) % 0xffffff;
 		}
 }
 
-static void	position(t_mlx *mlx, int keycode)
+static void		position(t_mlx *mlx, int keycode)
 {
 	if (keycode == 126)
 		POS_Y -= 10;
@@ -45,7 +64,7 @@ static void	position(t_mlx *mlx, int keycode)
 		POS_X += 10;
 }
 
-static void	angle(t_mlx *mlx, int keycode)
+static void		angle(t_mlx *mlx, int keycode)
 {
 	if (keycode == 13)
 		ANGLE_Y -= 1;
@@ -57,7 +76,7 @@ static void	angle(t_mlx *mlx, int keycode)
 		ANGLE_X += 1;
 }
 
-int			keys(int keycode, void *param)
+int				keys(int keycode, void *param)
 {
 	ft_printf("keycode press = %d\n", keycode);
 	cleaner(param);
@@ -77,6 +96,8 @@ int			keys(int keycode, void *param)
 		zoom(param);
 	else if (keycode == 49 || keycode == 48)
 		colorise(param, keycode);
+	else if (keycode == 51)
+		reset(param);
 	painter(param);
 	return (0);
 }
