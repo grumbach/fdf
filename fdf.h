@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 10:56:09 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:03:48 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include "mlx.h"
+# include <time.h>
 
 typedef	struct		s_point
 {
@@ -79,6 +80,7 @@ int					mouse(int button, int x, int y, void *param);
 int					keys(int keycode, void *param);
 void				zoom(t_mlx *mlx);
 void				unzoom(t_mlx *mlx);
+int					get_colorful(t_mlx *mlx, int x_count, int y_count);
 
 # define WIN_NAME "fdf"
 # define WIN_W 1024
@@ -89,6 +91,7 @@ void				unzoom(t_mlx *mlx);
 # define DEFAULT_COLOR 0x00ff00
 
 # define Z ((*web)[y_count][x_count]).z
+# define COLOR ((*web)[y_count][x_count]).color
 # define ZOOM ((t_conv*)(mlx->conv))->zoom
 # define POS_X ((t_conv*)(mlx->conv))->pos_x
 # define POS_Y ((t_conv*)(mlx->conv))->pos_y

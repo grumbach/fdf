@@ -6,11 +6,39 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 02:44:04 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 10:53:08 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:26:43 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int					get_colorful(t_mlx *mlx, int x_count, int y_count)
+{
+	int				color;
+	t_point			(*web)[mlx->web_y][mlx->web_x];
+
+	web = mlx->web;
+	color = DEFAULT_COLOR;
+	if (COLOR != DEFAULT_COLOR)
+		color = COLOR;
+	if (++x_count < mlx->web_x)
+		if (COLOR != DEFAULT_COLOR)
+			color = COLOR;
+	x_count--;
+	if (++y_count < mlx->web_y)
+		if (COLOR != DEFAULT_COLOR)
+			color = COLOR;
+	y_count -= 2;
+	if (y_count > 0)
+		if (COLOR != DEFAULT_COLOR)
+			color = COLOR;
+	y_count++;
+	x_count--;
+	if (x_count > 0)
+		if (COLOR != DEFAULT_COLOR)
+			color = COLOR;
+	return (color);
+}
 
 void				put_pixel(t_mlx *mlx, int x, int y, int color)
 {

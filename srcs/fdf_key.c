@@ -6,11 +6,32 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 10:53:58 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 01:39:59 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:25:47 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	colorise(t_mlx *mlx, int keycode)
+{
+	int			y_count;
+	int			x_count;
+	int			col;
+	t_point		(*web)[mlx->web_y][mlx->web_x];
+
+	web = mlx->web;
+	srand(time(NULL));
+	col = rand();
+	y_count = -1;
+	while (++y_count < mlx->web_y && (x_count = -1))
+		while (++x_count < mlx->web_x)
+		{
+			if (keycode == 49)
+				COLOR = (COLOR + col) % 0xffffff;
+			else
+				COLOR = (COLOR + rand()) % 0xffffff;
+		}
+}
 
 static void	position(t_mlx *mlx, int keycode)
 {
@@ -54,6 +75,8 @@ int			keys(int keycode, void *param)
 		unzoom(param);
 	else if (keycode == 69)
 		zoom(param);
+	else if (keycode == 49 || keycode == 48)
+		colorise(param, keycode);
 	painter(param);
 	return (0);
 }
