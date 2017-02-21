@@ -6,26 +6,11 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 02:23:27 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 09:50:28 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void				put_pixel(t_mlx *mlx, int x, int y, int color)
-{
-	int				i;
-
-	if (x >= IMG_W || y >= IMG_H || x < 0 || y < 0)
-	{
-		ft_printf("x = %d, y = %d\n", x, y);
-		errors(2, "Out of bounds");
-	}
-	i = mlx->linesize * y + x * (mlx->bpp / 8);
-	mlx->data[i] = color & 0xff;
-	mlx->data[++i] = color >> 8 & 0xff;
-	mlx->data[++i] = color >> 16;
-}
 
 static int			in_map(int x_count, int y_count, t_mlx *mlx)
 {
@@ -37,10 +22,15 @@ static int			in_map(int x_count, int y_count, t_mlx *mlx)
 	return (1);
 }
 
+static t_xy			there()
+{
+}
+
 void				painter(t_mlx *mlx)
 {
 	int			y_count;
 	int			x_count;
+	t_xy		here;
 	t_point		(*web)[mlx->web_y][mlx->web_x];
 
 	web = mlx->web;
@@ -48,8 +38,13 @@ void				painter(t_mlx *mlx)
 	while (++y_count < mlx->web_y && (x_count = -1))
 		while (++x_count < mlx->web_x)
 		{
+			here = (t_xy){XPUT, YPUT};
 			if (in_map(x_count, y_count, mlx))
-				put_pixel(mlx, XPUT, YPUT, (*web)[y_count][x_count].color);
+				put_pixel(mlx, here.x, here.y, (*web)[y_count][x_count].color);
+			if (x_count + 1 < mlx->web_x)
+				put_line(mlx, here, there());
+			if (y_count + 1 < mlx->web_y)
+				put_line(mlx, here, there());
 		}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img, 0, 0);
 }
@@ -76,6 +71,7 @@ void				fdf_painter(const int y, const int x, t_point web[y][x])
 	t_conv		conv;
 
 	ft_bzero(&conv, sizeof(t_conv));
+	ft_bzero(&mlx, sizeof(t_mlx));
 	mlx.conv = &conv;
 	mlx.web_x = x;
 	mlx.web_y = y;
