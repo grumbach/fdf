@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 10:53:58 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 01:04:13 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 01:39:59 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ static void	position(t_mlx *mlx, int keycode)
 		POS_X += 10;
 }
 
+static void	angle(t_mlx *mlx, int keycode)
+{
+	if (keycode == 13)
+		ANGLE_Y -= 1;
+	if (keycode == 1)
+		ANGLE_Y += 1;
+	if (keycode == 0)
+		ANGLE_X -= 1;
+	if (keycode == 2)
+		ANGLE_X += 1;
+}
+
 int			keys(int keycode, void *param)
 {
 	ft_printf("keycode press = %d\n", keycode);
@@ -36,6 +48,8 @@ int			keys(int keycode, void *param)
 	}
 	else if ((keycode <= 126) && (keycode >= 123))
 		position(param, keycode);
+	else if (((keycode >= 0) && (keycode <= 2)) || keycode == 13)
+		angle(param, keycode);
 	else if (keycode == 78)
 		unzoom(param);
 	else if (keycode == 69)

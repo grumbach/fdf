@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 01:00:37 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 02:35:58 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ typedef	struct		s_point
 
 typedef struct		s_conv
 {
-	int				zoom;
-	int				pos_x;
-	int				pos_y;
+	double			zoom;
+	double			pos_x;
+	double			pos_y;
+	double			angle_x;
+	double			angle_y;
 }					t_conv;
 
 typedef struct		s_mlx
@@ -69,9 +71,13 @@ void				unzoom(t_mlx *mlx);
 
 # define DEFAULT_COLOR 0x00ff00
 
+# define Z ((*web)[y_count][x_count]).z
 # define ZOOM ((t_conv*)(mlx->conv))->zoom
 # define POS_X ((t_conv*)(mlx->conv))->pos_x
 # define POS_Y ((t_conv*)(mlx->conv))->pos_y
-
+# define ANGLE_X ((t_conv*)(mlx->conv))->angle_x
+# define ANGLE_Y ((t_conv*)(mlx->conv))->angle_y
+# define XPUT x_count * ZOOM + POS_X + Z * ANGLE_X
+# define YPUT y_count * ZOOM + POS_Y + Z * ANGLE_Y
 
 #endif

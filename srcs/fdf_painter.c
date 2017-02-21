@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 01:04:19 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 02:23:27 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	int				i;
 
-	if (x >= IMG_W || y >= IMG_H)
+	if (x >= IMG_W || y >= IMG_H || x < 0 || y < 0)
 	{
 		ft_printf("x = %d, y = %d\n", x, y);
 		errors(2, "Out of bounds");
@@ -27,10 +27,12 @@ void				put_pixel(t_mlx *mlx, int x, int y, int color)
 	mlx->data[++i] = color >> 16;
 }
 
-static int			in_map(int x, int y, t_mlx *mlx)
+static int			in_map(int x_count, int y_count, t_mlx *mlx)
 {
-	if (x * ZOOM + POS_X >= IMG_W || y * ZOOM + POS_Y >= IMG_H ||\
-		x * ZOOM + POS_X < 0 || y * ZOOM + POS_Y < 0)
+	t_point		(*web)[mlx->web_y][mlx->web_x];
+
+	web = mlx->web;
+	if (XPUT >= IMG_W || YPUT >= IMG_H || XPUT < 0 || YPUT < 0)
 		return (0);
 	return (1);
 }
@@ -47,10 +49,7 @@ void				painter(t_mlx *mlx)
 		while (++x_count < mlx->web_x)
 		{
 			if (in_map(x_count, y_count, mlx))
-				put_pixel(mlx, \
-					x_count * ZOOM + POS_X, \
-					y_count * ZOOM + POS_Y, \
-				(*web)[y_count][x_count].color);
+				put_pixel(mlx, XPUT, YPUT, (*web)[y_count][x_count].color);
 		}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img, 0, 0);
 }
@@ -67,10 +66,7 @@ void				cleaner(t_mlx *mlx)
 		while (++x_count < mlx->web_x)
 		{
 			if (in_map(x_count, y_count, mlx))
-				put_pixel(mlx, \
-					x_count * ZOOM + POS_X, \
-					y_count * ZOOM + POS_Y, \
-					0);
+				put_pixel(mlx, XPUT, YPUT, 0);
 		}
 }
 
@@ -79,6 +75,7 @@ void				fdf_painter(const int y, const int x, t_point web[y][x])
 	t_mlx		mlx;
 	t_conv		conv;
 
+	ft_bzero(&conv, sizeof(t_conv));
 	mlx.conv = &conv;
 	mlx.web_x = x;
 	mlx.web_y = y;
