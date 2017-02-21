@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 09:50:28 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 10:53:55 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ static int			in_map(int x_count, int y_count, t_mlx *mlx)
 	return (1);
 }
 
-static t_xy			there()
+static t_xy			there(t_mlx *mlx, int x_count, int y_count)
 {
+	t_xy			there;
+	t_point		(*web)[mlx->web_y][mlx->web_x];
+
+	web = mlx->web;
+	there = (t_xy){XPUT, YPUT};
+	return (there);
 }
 
 void				painter(t_mlx *mlx)
@@ -42,9 +48,9 @@ void				painter(t_mlx *mlx)
 			if (in_map(x_count, y_count, mlx))
 				put_pixel(mlx, here.x, here.y, (*web)[y_count][x_count].color);
 			if (x_count + 1 < mlx->web_x)
-				put_line(mlx, here, there());
+				put_line(mlx, here, there(mlx, x_count + 1, y_count), DEFAULT_COLOR);
 			if (y_count + 1 < mlx->web_y)
-				put_line(mlx, here, there());
+				put_line(mlx, here, there(mlx, x_count, y_count + 1), DEFAULT_COLOR);
 		}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, mlx->img, 0, 0);
 }
@@ -53,6 +59,7 @@ void				cleaner(t_mlx *mlx)
 {
 	int			y_count;
 	int			x_count;
+	t_xy		here;
 	t_point		(*web)[mlx->web_y][mlx->web_x];
 
 	web = mlx->web;
@@ -60,8 +67,13 @@ void				cleaner(t_mlx *mlx)
 	while (++y_count < mlx->web_y && (x_count = -1))
 		while (++x_count < mlx->web_x)
 		{
+			here = (t_xy){XPUT, YPUT};
 			if (in_map(x_count, y_count, mlx))
 				put_pixel(mlx, XPUT, YPUT, 0);
+			if (x_count + 1 < mlx->web_x)
+				put_line(mlx, here, there(mlx, x_count + 1, y_count), 0);
+			if (y_count + 1 < mlx->web_y)
+				put_line(mlx, here, there(mlx, x_count, y_count + 1), 0);
 		}
 }
 

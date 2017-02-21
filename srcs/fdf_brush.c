@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 02:44:04 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 09:47:37 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/21 10:53:08 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				put_pixel(t_mlx *mlx, int x, int y, int color)
 	mlx->data[++i] = color >> 16;
 }
 
-void				put_line(t_mlx *mlx, t_xy a, t_xy b)
+void				put_line(t_mlx *mlx, t_xy a, t_xy b, int color)
 {
 	t_bresenham		badass;
 
@@ -40,7 +40,7 @@ void				put_line(t_mlx *mlx, t_xy a, t_xy b)
 	badass.e2 = badass.err;
 	while (1)
 	{
-		put_pixel(mlx, a.x, a.y, DEFAULT_COLOR);
+		put_pixel(mlx, a.x, a.y, color);
 		if (a.x == b.x && a.y == b.y)
 			break ;
 		badass.e2 = badass.err;
