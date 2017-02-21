@@ -1,3 +1,5 @@
 .DS*
 *.o
+*.a
 *.dSYM
+author
