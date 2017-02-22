@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 01:15:52 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/22 23:57:04 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/23 00:27:04 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_xy			there(t_mlx *mlx, int x_count, int y_count)
 	t_xy		there;
 	t_point		(*web)[mlx->web_y][mlx->web_x];
 
+	there = (t_xy){0, 0};
 	web = mlx->web;
 	if (mlx->projection == 1)
 		there = (t_xy){XPUT + POS_X, YPUT + POS_Y};
