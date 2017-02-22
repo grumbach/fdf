@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 16:58:22 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/23 00:19:42 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_mlx
 	int				bpp;
 	int				linesize;
 	int				endian;
+	int				projection;
 }					t_mlx;
 
 typedef struct		s_bresenham
@@ -97,7 +98,9 @@ int					get_colorful(t_mlx *mlx, int x_count, int y_count);
 # define POS_Y ((t_conv*)(mlx->conv))->pos_y
 # define ANGLE_X ((t_conv*)(mlx->conv))->angle_x
 # define ANGLE_Y ((t_conv*)(mlx->conv))->angle_y
-# define XPUT x_count * ZOOM + POS_X + Z * ANGLE_X
-# define YPUT y_count * ZOOM + POS_Y + Z * ANGLE_Y
+# define XPUT (x_count + Z * ANGLE_X / 42) * ZOOM
+# define YPUT (y_count + Z * ANGLE_Y / 42) * ZOOM
+# define XISO XPUT - YPUT
+# define YISO (XPUT + YPUT) / 2
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 10:53:58 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/21 17:40:49 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/23 00:15:44 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void		reset(t_mlx *mlx)
 			WIN_W / mlx->web_x);
 	POS_X = 100;
 	POS_Y = 100;
-	ANGLE_X = 3;
-	ANGLE_Y = 3;
+	ANGLE_X = 0;
+	ANGLE_Y = 0;
 }
 
 static void		colorise(t_mlx *mlx, int keycode)
@@ -46,7 +46,7 @@ static void		colorise(t_mlx *mlx, int keycode)
 		while (++x_count < mlx->web_x)
 		{
 			if (keycode == 49)
-				COLOR = (COLOR + col + Z * 42) % 0xffffff;
+				COLOR = (COLOR + col) % 0xffffff + Z * 42;
 			else
 				COLOR = (COLOR + rand()) % 0xffffff;
 		}
@@ -74,6 +74,10 @@ static void		angle(t_mlx *mlx, int keycode)
 		ANGLE_X -= 1;
 	if (keycode == 2)
 		ANGLE_X += 1;
+	if (keycode == 18)
+		mlx->projection = 1;
+	if (keycode == 19)
+		mlx->projection = 2;
 }
 
 int				keys(int keycode, void *param)
@@ -88,7 +92,8 @@ int				keys(int keycode, void *param)
 	}
 	else if ((keycode <= 126) && (keycode >= 123))
 		position(param, keycode);
-	else if (((keycode >= 0) && (keycode <= 2)) || keycode == 13)
+	else if (((keycode >= 0) && (keycode <= 2)) || keycode == 13 || \
+			keycode == 18 || keycode == 19)
 		angle(param, keycode);
 	else if (keycode == 78)
 		unzoom(param);
