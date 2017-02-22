@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:33:07 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 16:52:12 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/23 00:30:17 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void		overmind(const char *read, const int y, const int x)
 	while (++y_count < y && (x_count = -1))
 		while (++x_count < x)
 		{
-			web[y_count][x_count].x = 0;
-			web[y_count][x_count].y = 0;
 			web[y_count][x_count].z = 0;
 			web[y_count][x_count].color = DEFAULT_COLOR;
 		}

@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 23:10:35 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/19 16:59:14 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/23 00:30:40 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void			fdf_parser(const int y, const int x, t_point web[y][x], \
 				while (*read != '\n' && ft_strchr("xABCDEF1234567890", *read))
 					read++;
 			}
-			web[y_count][x_count].x = x_count;
-			web[y_count][x_count].y = y_count;
 			read++;
 		}
 	}

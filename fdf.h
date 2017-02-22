@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 03:34:25 by agrumbac          #+#    #+#             */
-/*   Updated: 2017/02/23 00:19:42 by agrumbac         ###   ########.fr       */
+/*   Updated: 2017/02/23 00:30:02 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 
 typedef	struct		s_point
 {
-	int				x;
-	int				y;
 	int				z;
 	int				color;
 }					t_point;
