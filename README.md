@@ -17,7 +17,7 @@ Except the parsing part and by using mlx, this project doesn't use MALLOC for it
 ## Installation
 
 $> git clone https://github.com/grumbach/fdf.git && cd fdf && git clone https://github.com/grumbach/libft.git && make
-%> ./fdf map.fdf
+$> ./fdf map.fdf
 
 ## Usage
 
